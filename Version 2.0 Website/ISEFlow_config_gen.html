@@ -1,0 +1,177 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/config_form.css">
+<link rel="stylesheet" type="text/css" href="css/iseage.css">
+<script type="text/javascript" language="javascript" src="jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" language="javascript" src="jquery/jquery-accordian.js"></script>
+<script type="text/javascript" language="javascript" src="js/config-generator.js"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ISEFlow Configuration File Generator</title>
+</head>
+
+
+
+<body class="oneColElsCtrHdr">
+<div id="container">
+	<div id="header">
+		<h1>ISEFlow Configuration File Generator</h1>
+	<!-- end #header --></div>
+
+	 <div id="mainContent">
+		<img src="images/logo.jpg" width="605" height="235" />
+	
+		<br /><br />
+	
+
+		<div class="expandable-panel" id="cp-1">
+			<div class="expandable-panel-heading">
+				<h2>1.) Number of Boards<span class="icon-close-open"></span></h2>
+			</div>
+			<div class="expandable-panel-content">
+				<br />
+				<form name="numboards">
+					<label>Number of boards: <input type="number" name="boards" id="boards" min="1"/></label><br /><br />
+					<input class="expandable-panel-recompute" name="generate_boards" type="button" value="Set number of boards" onclick='createBoards();'/>
+				</form>
+				<br />
+			</div>
+		</div>
+
+		<div class="expandable-panel" id="cp-2">
+			<div class="expandable-panel-heading">
+				<h2>2.) Number of Routers<span class="icon-close-open"></span></h2>
+			</div>
+			<div class="expandable-panel-content">
+				<br />
+					<p id="num_routers"></p>
+					<input class="expandable-panel-recompute" name="generate_routers" type="button" value="Set number of routers per board" onclick='nameRouters();'/>
+				<br />
+				<br />
+			</div>
+		</div>
+
+		<div class="expandable-panel" id="cp-3">
+			<div class="expandable-panel-heading">
+				<h2>3.) Name Routers<span class="icon-close-open"></span></h2>
+			</div>
+			<div class="expandable-panel-content">
+				<br />
+					<p id="name_routers"></p>
+					<input class="expandable-panel-recompute" name="generate_router_config" type="button" value="Name the routers" onclick='numBackplanes();'/>
+				<br />
+				<br />
+			</div>
+		</div>
+
+		<div class="expandable-panel" id="cp-4">
+			<div class="expandable-panel-heading">
+				<h2>4.) Number of Backplanes<span class="icon-close-open"></span></h2>
+			</div>
+			<div class="expandable-panel-content">
+				<br />
+					<p id="num_backplanes"></p>
+					<input class="expandable-panel-recompute" name="generate_backplanes" type="button" value="Set number of backplanes" onclick='configBackplanes();'/>
+				<br />
+				<br />
+			</div>
+		</div>
+
+		<div class="expandable-panel" id="cp-5">
+			<div class="expandable-panel-heading">
+				<h2>5.) Configure Backplanes<span class="icon-close-open"></span></h2>
+			</div>
+			<div class="expandable-panel-content">
+				<br />
+					<p id="bp_config"></p>
+					<input class="expandable-panel-recompute" name="generate_router_config_outside" type="button" value="Configure the backplanes" onclick='addBackplaneLinks();'/>
+				<br />
+				<br />
+			</div>
+		</div>
+
+		<div class="expandable-panel" id="cp-6">
+			<div class="expandable-panel-heading">
+				<h2>6.) Add Routers to Backplanes<span class="icon-close-open"></span></h2>
+			</div>
+			<div class="expandable-panel-content">
+				<br />
+					<p id="bp_add_boards"></p>
+					<input class="expandable-panel-recompute" name="add_routers_to_backplane" type="button" value="Add routers to the backplanes" onclick='createRouters();'/>
+				<br />
+				<br />
+			</div>
+		</div>
+		
+		<div class="expandable-panel" id="cp-7">
+			<div class="expandable-panel-heading">
+				<h2>7.) Configure Routers<span class="icon-close-open"></span></h2>
+			</div>
+			<div class="expandable-panel-content">
+				<br />
+					<p id="config_routers_outside"></p>
+					<input class="expandable-panel-recompute" name="generate_router_config_outside" type="button" value="Configure the outside interfaces" onclick='setup_link_loses();'/>
+				<br />
+				<br />
+			</div>
+		</div>
+		
+		<div class="expandable-panel" id="cp-8">
+			<div class="expandable-panel-heading">
+				<h2>8.) Setup Link Losses<span class="icon-close-open"></span></h2>
+			</div>
+			<div class="expandable-panel-content">
+				<br />
+					<p id="setup_link_loses"></p>
+					<input class="expandable-panel-recompute" name="setup_link_loses" type="button" value="Setup Link Losses" onclick='connect_routers();'/>
+				<br />
+				<br />
+			</div>
+		</div>
+		
+		
+		<div class="expandable-panel" id="cp-9">
+			<div class="expandable-panel-heading">
+				<h2>9.) Connect Routers<span class="icon-close-open"></span></h2>
+			</div>
+			<div class="expandable-panel-content">
+				<br />
+					<p id="connect_routers"></p>
+					<input class="expandable-panel-recompute" name="connect_routers" type="button" value="Connect Routers" onclick='configNumRouteRules();'/>
+				<br />
+				<br />
+			</div>
+		</div>
+
+
+		<div class="expandable-panel" id="cp-10">
+			<div class="expandable-panel-heading">
+				<h2>10.) Configure Router Rules<span class="icon-close-open"></span></h2>
+			</div>
+			<div class="expandable-panel-content">
+				<br />
+					<p id="config_route_rules"></p>
+					<input class="expandable-panel-recompute" name="generate_router_config_rules" type="button" value="Generate the config file" onclick='generateConfig();'/>
+				<br />
+			</div>
+		</div>
+
+		<div class="expandable-panel" id="cp-11">
+			<div class="expandable-panel-heading">
+				<h2>11.) Configuration File<span class="icon-close-open"></span></h2>
+			</div>
+			<div class="expandable-panel-content">
+				<br />
+					<div id="config_file" style="height:500px;overflow:scroll"></div>
+				<br />
+			</div>
+		</div>
+		
+	</div>
+	<div id="footer">
+		<p>Copyright 2014 ISU - Information Assurance Center</p>
+    
+	<!-- end #footer --></div>
+</div>
+</body>
+</html>
